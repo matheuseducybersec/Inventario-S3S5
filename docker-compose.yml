@@ -1,0 +1,23 @@
+services:
+  inventario:
+    build: .
+    image: inventario-risco:2.0
+    container_name: inventario
+    ports:
+      - "8000:8000"
+    volumes:
+      - dados:/app/data
+    # Se o processo cair ou o servidor reiniciar, o Docker sobe de novo
+    # (garante as 24 h de funcionamento contínuo do requisito 3).
+    restart: unless-stopped
+    # Limites de recursos: um bug não derruba o servidor compartilhado
+    mem_limit: 256m
+    cpus: 0.5
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  dados:
