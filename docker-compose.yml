@@ -1,10 +1,18 @@
+# Porta e nomes podem ser trocados por variáveis (arquivo .env ao lado deste).
+# Sem .env valem os padrões: porta 8000 e container "inventario".
+# No servidor compartilhado cada aluno precisa de porta e nomes próprios, ex.:
+#   PORTA=8203
+#   CONTAINER=inventario-12621cbs203
+#   PROJETO=inventario-12621cbs203
+name: ${PROJETO:-inventario-s3s5}
+
 services:
   inventario:
     build: .
-    image: inventario-risco:2.0
-    container_name: inventario
+    image: ${CONTAINER:-inventario}-risco:2.0
+    container_name: ${CONTAINER:-inventario}
     ports:
-      - "8000:8000"
+      - "${PORTA:-8000}:8000"
     volumes:
       - dados:/app/data
     # Se o processo cair ou o servidor reiniciar, o Docker sobe de novo

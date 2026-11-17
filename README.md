@@ -83,14 +83,23 @@ uvicorn app.api:app --reload      # API em http://127.0.0.1:8000/docs
 
 ### No servidor da disciplina (10.0.99.150)
 
+O servidor é compartilhado: a porta 8000 já é usada por outro serviço, então este projeto
+usa porta e nomes próprios, definidos num arquivo `.env` (lido automaticamente pelo compose).
+O usuário não pertence ao grupo `docker`, por isso os comandos usam `sudo`.
+
 ```bash
-ssh <matricula>@10.0.99.150
+ssh 12621CBS203@10.0.99.150
 git clone https://github.com/matheuseducybersec/Inventario-S3S5.git
 cd Inventario-S3S5
-docker compose up -d --build
-docker exec inventario python -m app.demo
-curl http://localhost:8000/health        # repetir após 24 h: uptime_horas >= 24
+echo PORTA=8203 > .env
+echo CONTAINER=inventario-12621cbs203 >> .env
+echo PROJETO=inventario-12621cbs203 >> .env
+sudo docker compose up -d --build
+sudo docker exec inventario-12621cbs203 python -m app.demo
+curl http://localhost:8203/health        # repetir após 24 h: uptime_horas >= 24
 ```
+
+API no servidor: `http://10.0.99.150:8203/docs`
 
 ---
 
