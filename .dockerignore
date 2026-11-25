@@ -4,3 +4,9 @@ __pycache__
 *.pyc
 data
 *.md
+# testes com pytest e relatórios rodam fora do container (pytest não está na imagem)
+tests/test_pytest.py
+tests/conftest.py
+pytest.ini
+requirements-dev.txt
+relatorios

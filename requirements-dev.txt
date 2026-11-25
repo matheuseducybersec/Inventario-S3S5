@@ -1,0 +1,5 @@
+# Ferramentas de teste (não vão para o container de produção)
+-r requirements.txt
+pytest==8.4.2
+pytest-html==4.1.1
+httpx==0.28.1

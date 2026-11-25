@@ -20,7 +20,9 @@ app/
 ├── api.py          API HTTP (FastAPI) — processo principal do container
 ├── cli.py          Menu textual (mesma lógica do Trabalho 1)
 └── demo.py         Carrega o cenário de validação resolvido à mão
-tests/test_risco.py Testes automáticos (unittest)
+tests/test_risco.py Testes automáticos (unittest, 12 testes)
+tests/test_pytest.py 3 testes com pytest (API, invertibilidade, JSON + polimorfismo)
+relatorios/         Relatório dos testes (HTML, JUnit XML e resumo em Markdown)
 Dockerfile, docker-compose.yml, requirements.txt
 ```
 
@@ -75,7 +77,9 @@ docker run -d --name inventario --restart unless-stopped -p 8000:8000 -v inventa
 python -m venv .venv
 .venv\Scripts\activate            # Windows  (Linux: source .venv/bin/activate)
 pip install -r requirements.txt
-python -m unittest -v             # testes
+python -m unittest -v             # testes (unittest)
+pip install -r requirements-dev.txt
+pytest -v --html=relatorios/relatorio_testes.html --self-contained-html   # pytest + relatório
 python -m app.demo                # cenário de exemplo
 python -m app.cli                 # menu
 uvicorn app.api:app --reload      # API em http://127.0.0.1:8000/docs
